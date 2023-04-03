@@ -1,0 +1,55 @@
+namespace StatisticalOperations
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<double> numbers = new List<double>();
+
+            while (true)
+            {
+                Console.Write("Enter a number or type 'End' to stop: ");
+                string input = Console.ReadLine();
+
+                if (input == "End")
+                {
+                    break;
+                }
+
+                double number;
+                bool isNumber = double.TryParse(input, out number);
+
+                if (isNumber)
+                {
+                    numbers.Add(number);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                }
+            }
+
+            Console.Write("Enter mode (FindMax, FindMin, FindMean): ");
+            string mode = Console.ReadLine();
+
+            switch (mode)
+            {
+                case "FindMax":
+                    double max = numbers.Max();
+                    Console.WriteLine("The maximum number is: " + max);
+                    break;
+                case "FindMin":
+                    double min = numbers.Min();
+                    Console.WriteLine("The minimum number is: " + min);
+                    break;
+                case "FindMean":
+                    double mean = numbers.Average();
+                    Console.WriteLine("The mean is: " + mean);
+                    break;
+                default:
+                    Console.WriteLine("Invalid mode");
+                    break;
+            }
+        }
+    }
+}
