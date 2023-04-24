@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+
+class Program {
+    static void Main(string[] args) {
+        Console.Write("Enter number of items in your bag: ");
+        int numOfItems = int.Parse(Console.ReadLine());
+
+        Dictionary<string, List<string>> items = new Dictionary<string, List<string>>();
+
+        for (int i = 0; i < numOfItems; i++) {
+            Console.Write("Enter item name: ");
+            string itemName = Console.ReadLine();
+
+            Console.Write("Enter item type (excluding \"ShowAll\"): ");
+            string itemType = Console.ReadLine();
+
+            if (!items.ContainsKey(itemType)) {
+                items[itemType] = new List<string>();
+            }
+            items[itemType].Add(itemName);
+        }
+
+        while (true) {
+            Console.Write("Enter search mode (\"ShowAll\" or item type, or other text to end): ");
+            string searchMode = Console.ReadLine();
+
+            if (searchMode == "ShowAll") {
+                foreach (KeyValuePair<string, List<string>> item in items) {
+                    Console.WriteLine("Type: " + item.Key);
+                    Console.WriteLine("Items: " + string.Join(", ", item.Value));
+                }
+            } else if (items.ContainsKey(searchMode)) {
+                Console.WriteLine("Items with type \"" + searchMode + "\": " + string.Join(", ", items[searchMode]));
+            } else {
+                Console.WriteLine("End");
+                break;
+            }
+        }
+    }
+}
